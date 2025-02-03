@@ -4,6 +4,17 @@ from loguru import logger
 from backend.main import get_llm_engine
 
 
+logger.info("Setting page configuration")
+st.set_page_config(
+    page_title="Sprachhilfer",
+    page_icon=":books:",
+    menu_items={
+        "About": "https://github.com/ShawonAshraf/sprachhilfer",
+        "Report a Bug": "https://github.com/ShawonAshraf/sprachhilfer/issues",  # type: ignore
+    },
+)
+
+
 def create_interface() -> None:
     llm_engine = get_llm_engine()
 
