@@ -6,11 +6,12 @@ authors = ["Shawon Ashraf"]
 license = "MIT"
 readme = "README.md"
 
-package-mode = false
-
 packages = [
     {include="backend", from="src"},
 ]
+
+[tool.poetry.scripts]
+backend = "backend.main:main"
 
 [tool.poetry.dependencies]
 python = ">=3.12"
