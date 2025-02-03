@@ -1,11 +1,11 @@
 from backend.engine.r1engine import DeepSeekR1Engine
-import os
+from backend.settings import settings
 
 def main():
     r1_engine = DeepSeekR1Engine(
-        model=str(os.getenv("LLM_MODEL_NAME")),
-        api_key=os.getenv("LLM_API_KEY"),
-        base_url=os.getenv("LLM_BASE_URL"),
+        model=settings.llm_model_name,
+        api_key=settings.llm_api_key,
+        base_url=settings.llm_base_url,
         system_input=None
     )
 
