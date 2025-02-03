@@ -9,6 +9,7 @@ readme = "README.md"
 packages = [
     {include="backend", from="src"},
     {include="templates", from="src"},
+    {include="frontend", from="src"},
 ]
 
 [tool.poetry.scripts]
