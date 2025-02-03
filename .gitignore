@@ -5,6 +5,7 @@ __pycache__/
 .venv/
 venv/
 .DS_Store
+.mypy_cache/
 
 # ignore env files
 .env
