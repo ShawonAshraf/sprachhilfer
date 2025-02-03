@@ -1,7 +1,7 @@
 import streamlit as st
 from loguru import logger
-from backend.engine.r1engine import DeepSeekR1Engine
 
+from backend.engine.r1engine import DeepSeekR1Engine
 from backend.main import get_llm_engine
 
 
@@ -24,17 +24,22 @@ def create_interface(llm_engine: DeepSeekR1Engine) -> None:
             clear_btn = st.form_submit_button(label="Leeren", icon="❌")
 
     # output area
-    with st.container():
-        st.header("Feedback")
+    with st.container(border=True):
         if submit_btn:
+            st.header("Feedback")
             with st.status("Bitte warten Sie!") as status:
                 out = llm_engine.generate(user_input)
                 status.update(label="Fertig!", state="complete")
-                st.toast("Rückmeldung generiert")
-            st.markdown(out.thought_process)
+                st.toast("Rückmeldung generiert 🤖")
 
-            st.markdown(out.answer)
+            with st.chat_message("user"):
+                st.caption("Antwort")
+                st.markdown(out.answer)
+            with st.chat_message("user"):
+                st.caption("Gedenken")
+                st.markdown(out.thought_process)
 
+        # TODO: implement the functionality
         if clear_btn:
             pass
 
