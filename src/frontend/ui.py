@@ -32,12 +32,14 @@ def create_interface(llm_engine: DeepSeekR1Engine) -> None:
                 status.update(label="Fertig!", state="complete")
                 st.toast("Rückmeldung generiert 🤖")
 
-            with st.chat_message("user"):
+            with st.expander("Gedenken"):
+                with st.chat_message("assistant"):
+                    st.caption("Ihr Feedback")
+                    st.markdown(out.thought_process)
+
+            with st.chat_message("assistant"):
                 st.caption("Antwort")
                 st.markdown(out.answer)
-            with st.chat_message("user"):
-                st.caption("Gedenken")
-                st.markdown(out.thought_process)
 
         # TODO: implement the functionality
         if clear_btn:
