@@ -4,7 +4,7 @@ from backend.settings import settings
 def main():
     r1_engine = DeepSeekR1Engine(
         model=settings.llm_model_name,
-        api_key=settings.llm_api_key,
+        api_key=settings.llm_api_key.get_secret_value(),
         base_url=settings.llm_base_url,
         system_input=None
     )
