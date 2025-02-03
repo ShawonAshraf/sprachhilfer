@@ -1,5 +1,9 @@
 from backend.engine.base import BaseLLMEngine, BaseLLMResponse
+from loguru import logger
 
+import os
+
+DEBUG = os.getenv("DEBUG")
 
 class DeepSeekR1Engine(BaseLLMEngine):
     def format_response(self, raw_response: str) -> BaseLLMResponse:
@@ -15,5 +19,9 @@ class DeepSeekR1Engine(BaseLLMEngine):
         answer = parts[1]
         # remove if there's an "Answer:" part
         answer = answer.replace("Answer:", "").strip()
+        
+        response = BaseLLMResponse(thought_process=thought, answer=answer)
+        if DEBUG:
+            logger.debug(response)
 
-        return BaseLLMResponse(thought_process=thought, answer=answer)
+        return response

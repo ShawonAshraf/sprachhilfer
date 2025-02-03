@@ -1,8 +1,12 @@
 import abc
+import os
 from typing import List, Optional
 
 from openai import OpenAI
 from pydantic import BaseModel
+from loguru import logger
+
+DEBUG = os.getenv("DEBUG")
 
 
 class BaseLLMResponse(BaseModel):
@@ -22,6 +26,10 @@ class BaseLLMEngine(BaseModel):
             messages.append({"role": "system", "content": self.system_input})
         if user_input:
             messages.append({"role": "user", "content": user_input})
+            
+        
+        if DEBUG:
+            logger.debug(messages)
 
         return messages
 
@@ -40,7 +48,11 @@ class BaseLLMEngine(BaseModel):
             messages=messages, temperature=temperature, model=self.model
         )
 
-        return response.choices[0].message.content
+        raw_response = response.choices[0].message.content
+        if DEBUG:
+            logger.debug(raw_response)
+        
+        return raw_response
 
     def generate(self, user_input: str) -> Optional[BaseLLMResponse]:
         raw_response = self.__generate_raw_response(user_input)
