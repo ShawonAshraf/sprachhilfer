@@ -25,7 +25,11 @@ def create_interface() -> None:
     # input text area
     st.header("Ihre Schrift")
     with st.form(key="input_form"):
-        user_input = st.text_area(placeholder="Schreiben Sie hier bitte!", label="")
+        user_input = st.text_area(
+            placeholder="Schreiben Sie hier bitte!",
+            label="schrift",
+            label_visibility="hidden",
+        )
 
         col1, col2, col3 = st.columns(3)
         with col1:
