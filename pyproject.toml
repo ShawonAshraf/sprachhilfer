@@ -30,6 +30,13 @@ pre-commit = "^4.1.0"
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3.4"
 
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
