@@ -22,6 +22,11 @@ def create_interface() -> None:
 
     st.title("Sprachhilfer")
 
+    # model info
+    with st.container(border=True):
+        st.markdown(f"**API:** {llm_engine.base_url}")
+        st.markdown(f"**Model:** {llm_engine.model}")
+
     # input text area
     st.header("Ihre Schrift")
     with st.form(key="input_form"):
