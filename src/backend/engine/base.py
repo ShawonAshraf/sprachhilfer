@@ -1,12 +1,11 @@
 import abc
-import os
 from typing import List, Optional
 
+from loguru import logger
 from openai import OpenAI
 from pydantic import BaseModel
-from loguru import logger
 
-DEBUG = os.getenv("DEBUG")
+from backend.settings import settings
 
 
 class BaseLLMResponse(BaseModel):
@@ -26,9 +25,8 @@ class BaseLLMEngine(BaseModel):
             messages.append({"role": "system", "content": self.system_input})
         if user_input:
             messages.append({"role": "user", "content": user_input})
-            
-        
-        if DEBUG:
+
+        if settings.debug:
             logger.debug(messages)
 
         return messages
@@ -39,6 +37,7 @@ class BaseLLMEngine(BaseModel):
         messages = self.__prepare_inference_input(user_input)
         assert len(messages) >= 1
 
+        logger.info(f"Initialising LLM Client with base_url: {self.base_url}")
         client = OpenAI(
             api_key=self.api_key,
             base_url=self.base_url,
@@ -49,12 +48,13 @@ class BaseLLMEngine(BaseModel):
         )
 
         raw_response = response.choices[0].message.content
-        if DEBUG:
+        if settings.debug:
             logger.debug(raw_response)
-        
+
         return raw_response
 
     def generate(self, user_input: str) -> Optional[BaseLLMResponse]:
+        logger.info(f"Generating response for input: {user_input}")
         raw_response = self.__generate_raw_response(user_input)
         return self.format_response(raw_response) if raw_response else None
 

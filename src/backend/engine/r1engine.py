@@ -1,10 +1,7 @@
-import os
-
 from loguru import logger
 
 from backend.engine.base import BaseLLMEngine, BaseLLMResponse
-
-DEBUG = os.getenv("DEBUG")
+from backend.settings import settings
 
 
 class DeepSeekR1Engine(BaseLLMEngine):
@@ -23,7 +20,7 @@ class DeepSeekR1Engine(BaseLLMEngine):
         answer = answer.replace("Answer:", "").strip()
 
         response = BaseLLMResponse(thought_process=thought, answer=answer)
-        if DEBUG:
+        if settings.debug:
             logger.debug(response)
 
         return response
