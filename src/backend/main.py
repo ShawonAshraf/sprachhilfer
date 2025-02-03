@@ -11,7 +11,7 @@ def main():
         system_input=get_system_prompt()
     )
 
-    print(r1_engine.generate("Wie hoch ist die Temperatur draußen?"))
+    _ = r1_engine.generate("Wie hoch ist die Temperatur draußen?")
 
 
 if __name__ == "__main__":
