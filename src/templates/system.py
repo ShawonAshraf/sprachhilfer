@@ -1,4 +1,16 @@
 def get_system_prompt() -> str:
+    """
+    Returns the system prompt for the language model.
+
+    The prompt instructs the model to assume the role of a German language teacher. The model's task is to read
+    the students' written German text and provide objective feedback based on spelling, grammar, and fluidity.
+    If the text is in English, the model should ask the student to rewrite it in German, with exceptions for
+    entity names in other languages.
+
+    Returns:
+        str: The system prompt for the language model.
+    """
+
     return """
     
     Assume the role of a German language teacher. Your job is to read what the students have written in German
