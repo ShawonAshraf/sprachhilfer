@@ -11,17 +11,10 @@ class BaseLLMResponse(BaseModel):
 
 
 class BaseLLMEngine(BaseModel):
-    def __init__(
-        self,
-        model: str,
-        base_url: Optional[str],
-        system_input: Optional[str],
-        api_key: Optional[str],
-    ) -> None:
-        self.api_key = api_key
-        self.base_url = base_url
-        self.model = model
-        self.system_input = system_input
+    model: str
+    base_url: Optional[str]
+    system_input: Optional[str]
+    api_key: Optional[str]
 
     def __prepare_inference_input(self, user_input: str) -> List:
         messages = []
