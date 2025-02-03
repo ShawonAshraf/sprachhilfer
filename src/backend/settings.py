@@ -19,10 +19,10 @@ class Settings(BaseSettings):
 
     app_name: str = "Sprachhilfer"
 
-    llm_base_url: str
-    llm_api_key: SecretStr
-    llm_model_name: str
-    debug: bool
+    llm_base_url: str = ""
+    llm_api_key: SecretStr = SecretStr("")
+    llm_model_name: str = ""
+    debug: bool = False
 
     model_config = SettingsConfigDict(env_file=".env")
 
