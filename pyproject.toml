@@ -26,6 +26,10 @@ pydantic-settings = "^2.7.1"
 ruff = "^0.9.4"
 pre-commit = "^4.1.0"
 
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.3.4"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
