@@ -31,5 +31,5 @@ poetry run streamlit run src/frontend/ui.py
 
 ## roadmap
 
-- [ ] #2
-- [ ] #3
+- [ ] [#2](https://github.com/ShawonAshraf/sprachhilfer/issues/2)
+- [ ] [#3](https://github.com/ShawonAshraf/sprachhilfer/issues/3)
