@@ -20,9 +20,10 @@ def create_interface(llm_engine: DeepSeekR1Engine) -> None:
             submit_btn = st.form_submit_button(label="Einreichen", icon="✅")
         with col2:
             pass
+        # TODO: fix later
         with col3:
-            clear_btn = st.form_submit_button(label="Leeren", icon="❌")
-
+            # clear_btn = st.form_submit_button(label="Leeren", icon="❌")
+            pass
     # output area
     with st.container(border=True):
         if submit_btn:
@@ -32,7 +33,7 @@ def create_interface(llm_engine: DeepSeekR1Engine) -> None:
                 status.update(label="Fertig!", state="complete")
                 st.toast("Rückmeldung generiert 🤖")
 
-            with st.expander("Gedenken"):
+            with st.expander("Denkprozess"):
                 with st.chat_message("assistant"):
                     st.caption("Ihr Feedback")
                     st.markdown(out.thought_process)
@@ -41,9 +42,9 @@ def create_interface(llm_engine: DeepSeekR1Engine) -> None:
                 st.caption("Antwort")
                 st.markdown(out.answer)
 
-        # TODO: implement the functionality
-        if clear_btn:
-            pass
+        # TODO: implement the functionality later
+        # if clear_btn:
+        #     pass
 
 
 if __name__ == "__main__":
