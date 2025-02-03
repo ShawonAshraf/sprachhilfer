@@ -8,3 +8,5 @@ venv/
 
 # ignore env files
 .env
+
+.qodo
