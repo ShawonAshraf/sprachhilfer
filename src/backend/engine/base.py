@@ -70,7 +70,7 @@ class BaseLLMEngine(BaseModel):
         Returns:
             List[dict]: A list of message dictionaries ready for inference.
         """
-        
+
         messages = []
         if self.system_input:
             messages.append({"role": "system", "content": self.system_input})
@@ -98,7 +98,7 @@ class BaseLLMEngine(BaseModel):
         Raises:
             AssertionError: If the prepared messages list is empty.
         """
-        
+
         messages = self.__prepare_inference_input(user_input)
         assert len(messages) >= 1
 

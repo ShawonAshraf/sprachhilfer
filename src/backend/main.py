@@ -8,7 +8,7 @@ def main():
         model=settings.llm_model_name,
         api_key=settings.llm_api_key.get_secret_value(),
         base_url=settings.llm_base_url,
-        system_input=get_system_prompt()
+        system_input=get_system_prompt(),
     )
 
     _ = r1_engine.generate("Wie hoch ist die Temperatur draußen?")
