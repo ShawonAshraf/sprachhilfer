@@ -29,7 +29,3 @@ Set `DEBUG` to `True` if you want debug logs locally. Other variables you can se
 poetry run streamlit run src/frontend/ui.py
 ```
 
-## roadmap
-
-- [ ] [#2](https://github.com/ShawonAshraf/sprachhilfer/issues/2)
-- [ ] [#3](https://github.com/ShawonAshraf/sprachhilfer/issues/3)
