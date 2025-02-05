@@ -4,6 +4,10 @@
 
 An LLM based application for learners of the German language to get feedback on their writing.
 
+## live version
+
+[Streamlit](https://sprachhilfer.streamlit.app/)
+
 
 ## local env setup
 
