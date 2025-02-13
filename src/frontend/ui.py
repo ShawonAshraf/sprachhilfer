@@ -1,6 +1,7 @@
 import streamlit as st
 from loguru import logger
 
+from backend.engine.r1engine import DeepSeekR1Engine
 from backend.main import get_llm_engine
 
 
@@ -15,13 +16,27 @@ st.set_page_config(
 )
 
 
-def create_interface() -> None:
-    llm_engine = get_llm_engine()
+def show_response(user_input: str, llm_engine: DeepSeekR1Engine) -> None:
+    st.header("Feedback")
+    with st.status("Bitte warten Sie!") as status:
+        out = llm_engine.generate(user_input)
+        status.update(label="Fertig!", state="complete")
+        st.toast("Rückmeldung generiert 🤖")
 
-    logger.info("Starting interface creation")
+    with st.expander("Denkprozess"):
+        with st.chat_message("assistant"):
+            st.caption("Ihr Feedback")
+            st.markdown(out.thought_process)
+
+    with st.chat_message("assistant"):
+        st.caption("Antwort")
+        st.markdown(out.answer)
+
+
+def show_interface(llm_engine: DeepSeekR1Engine) -> None:
+    logger.info("Starting interface")
 
     st.title("Sprachhilfer")
-
     # model info
     with st.container(border=True):
         st.markdown(f"**API:** {llm_engine.base_url}")
@@ -35,38 +50,20 @@ def create_interface() -> None:
             label="schrift",
             label_visibility="hidden",
         )
+        # triggers the response generation
+        submit_btn = st.form_submit_button(label="Einreichen", icon="✅")
 
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            submit_btn = st.form_submit_button(label="Einreichen", icon="✅")
-        with col2:
-            pass
-        # TODO: fix later
-        with col3:
-            # clear_btn = st.form_submit_button(label="Leeren", icon="❌")
-            pass
     # output area
     with st.container(border=True):
         if submit_btn:
-            st.header("Feedback")
-            with st.status("Bitte warten Sie!") as status:
-                out = llm_engine.generate(user_input)
-                status.update(label="Fertig!", state="complete")
-                st.toast("Rückmeldung generiert 🤖")
-
-            with st.expander("Denkprozess"):
-                with st.chat_message("assistant"):
-                    st.caption("Ihr Feedback")
-                    st.markdown(out.thought_process)
-
-            with st.chat_message("assistant"):
-                st.caption("Antwort")
-                st.markdown(out.answer)
-
-        # TODO: implement the functionality later
-        # if clear_btn:
-        #     pass
+            # check for input here
+            # show an error if input is empty
+            if not user_input:
+                st.error("Input can't be empty!", icon="🚨")
+            else:
+                show_response(user_input, llm_engine)
 
 
 if __name__ == "__main__":
-    create_interface()
+    engine: DeepSeekR1Engine = get_llm_engine()
+    show_interface(engine)
