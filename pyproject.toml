@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "sprachhilfer"
 version = "0.1.0"
-description = "An LLM based German writing tcorrection for the learners of the language"
+description = "An LLM based German writing correction tool for the learners of the language"
 authors = ["Shawon Ashraf"]
 license = "MIT"
 readme = "README.md"
